@@ -5,9 +5,4 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  server: {
-    proxy: {
-      "/api": "https://ai-study-assistant-production-8153.up.railway.app",
-    }
-  }
 })

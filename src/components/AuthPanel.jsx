@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BASE from "../api.js"
 
 export default function AuthPanel({ onAuth }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,7 +13,7 @@ export default function AuthPanel({ onAuth }) {
     setLoading(true);
     setError("");
 
-    const endpoint = isLogin ? `${import.meta.env.VITE_API_URL}/api/auth/login` : `${import.meta.env.VITE_API_URL}/api/auth/register`;
+    const endpoint = isLogin ? `${BASE}/api/auth/login` : `${BASE}/api/auth/register`;
     const body = isLogin ? { email, password } : { email, password, name };
 
     const res = await fetch(endpoint, {

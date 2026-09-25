@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BASE from "../api.js";
 
 export default function ExplainPanel({ accessToken }) {
   const [topic, setTopic] = useState("");
@@ -15,7 +16,7 @@ export default function ExplainPanel({ accessToken }) {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/ai/explain/stream`,
+        `${BASE}/api/ai/explain/stream`,
         {
           method: "POST",
           headers: {

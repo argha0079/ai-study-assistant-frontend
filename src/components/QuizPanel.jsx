@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BASE from "../api";
 
 export default function QuizPanel({ accessToken }) {
   const [topic, setTopic] = useState("");
@@ -15,7 +16,7 @@ export default function QuizPanel({ accessToken }) {
     setSelected({});
     setError("");
 
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ai/quiz`, {
+    const res = await fetch(`${BASE}/api/ai/quiz`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
