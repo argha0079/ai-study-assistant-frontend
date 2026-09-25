@@ -14,14 +14,17 @@ export default function ExplainPanel({ accessToken }) {
     setError("");
 
     try {
-      const res = await fetch("/api/ai/explain/stream", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${accessToken}`,
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/ai/explain/stream`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({ topic, mode }),
         },
-        body: JSON.stringify({ topic, mode }),
-      });
+      );
 
       if (!res.ok) {
         const data = await res.json();
@@ -43,7 +46,10 @@ export default function ExplainPanel({ accessToken }) {
         for (const line of lines) {
           if (!line.startsWith("data: ")) continue;
           const data = line.slice(6).trim();
-          if (data === "[DONE]") { setLoading(false); continue; }
+          if (data === "[DONE]") {
+            setLoading(false);
+            continue;
+          }
 
           try {
             const parsed = JSON.parse(data);
@@ -51,7 +57,7 @@ export default function ExplainPanel({ accessToken }) {
               setError(parsed.error);
               setLoading(false);
             } else if (parsed.token) {
-              setResponse(prev => prev + parsed.token);
+              setResponse((prev) => prev + parsed.token);
             }
           } catch {}
         }

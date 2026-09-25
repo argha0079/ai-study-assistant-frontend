@@ -12,7 +12,7 @@ export default function AuthPanel({ onAuth }) {
     setLoading(true);
     setError("");
 
-    const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
+    const endpoint = isLogin ? `${import.meta.env.VITE_API_URL}/api/auth/login` : `${import.meta.env.VITE_API_URL}/api/auth/register`;
     const body = isLogin ? { email, password } : { email, password, name };
 
     const res = await fetch(endpoint, {

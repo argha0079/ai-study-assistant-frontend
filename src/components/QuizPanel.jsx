@@ -15,7 +15,7 @@ export default function QuizPanel({ accessToken }) {
     setSelected({});
     setError("");
 
-    const res = await fetch("/api/ai/quiz", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ai/quiz`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
